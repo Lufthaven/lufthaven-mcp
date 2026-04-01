@@ -21,9 +21,16 @@ export async function runDeals(args: string[], json: boolean): Promise<void> {
   for (const d of deals) {
     const price = green(`$${d.price}`);
     const route = `${d.origin} → ${d.destination}`;
-    const airline = d.airline ?? "";
-    const stops = d.stops !== null ? (d.stops === 0 ? "nonstop" : `${d.stops} stop${d.stops > 1 ? "s" : ""}`) : "";
-    console.log(`  ${price.padEnd(12)} ${bold(route)}  ${dim(airline)}  ${dim(stops)}`);
-    if (d.departure_date) console.log(`  ${"".padEnd(12)} ${dim(d.departure_date)}${d.return_date ? ` → ${d.return_date}` : ""}`);
+    const airline = d.airlines ?? "";
+    const stops = d.number_of_stops_departing !== null
+      ? (d.number_of_stops_departing === 0 ? "nonstop" : `${d.number_of_stops_departing} stop${d.number_of_stops_departing > 1 ? "s" : ""}`)
+      : "";
+    const duration = d.total_flight_duration ?? "";
+    console.log(`  ${price.padEnd(12)} ${bold(route)}  ${dim(airline)}  ${dim(stops)}  ${dim(duration)}`);
+    if (d.departure_date) {
+      const dep = new Date(d.departure_date).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      const ret = d.return_date ? new Date(d.return_date).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
+      console.log(`  ${"".padEnd(12)} ${dim(dep)}${ret ? ` → ${ret}` : ""}${d.trip_length_in_days ? ` (${d.trip_length_in_days}d)` : ""}`);
+    }
   }
 }

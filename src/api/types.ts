@@ -132,16 +132,21 @@ export type DelayInfo = {
 
 /** Flight deal */
 export type FlightDeal = {
-  id: number;
+  id: string;
   origin: string;
   destination: string;
   price: number;
   currency: string;
-  airline: string | null;
+  airlines: string | null;
   departure_date: string | null;
   return_date: string | null;
-  stops: number | null;
-  found_at: string;
+  trip_length_in_days: number | null;
+  number_of_stops_departing: number | null;
+  number_of_stops_returning: number | null;
+  total_flight_duration: string | null;
+  google_flights_url: string | null;
+  offer_found_date: string;
+  flight_class: number;
 };
 
 /** TSA wait time response */
