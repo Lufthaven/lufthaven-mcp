@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "lufthaven",
-      "source": ".",
+      "source": "./",
       "description": "Flight data for AI agents — real-time tracking, weather, deals, and TSA wait times. No API key required."
     }
   ]
