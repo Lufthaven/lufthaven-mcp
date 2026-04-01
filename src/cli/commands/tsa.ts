@@ -5,18 +5,35 @@ export async function runTsa(args: string[], json: boolean): Promise<void> {
   const airport = args[0];
   if (!airport) { console.error("Usage: lufthaven tsa <airport_code>"); process.exit(1); }
 
-  const waits = await getTsaWaitTimes(airport.toUpperCase());
+  const data = await getTsaWaitTimes(airport.toUpperCase());
 
-  if (json) { console.log(JSON.stringify(waits, null, 2)); return; }
+  if (json) { console.log(JSON.stringify(data, null, 2)); return; }
 
-  if (waits.length === 0) { console.log(dim("No TSA wait data available.")); return; }
+  const cur = data.current;
+  const waitColor = cur.wait_minutes <= 5 ? green : cur.wait_minutes <= 15 ? yellow : red;
 
-  console.log(bold(`TSA Wait Times — ${airport.toUpperCase()}`));
+  console.log(bold(`TSA — ${data.airport}`));
+  console.log(`  ${dim("Current wait:")}  ${waitColor(`${cur.wait_minutes} min`)}`);
+  if (cur.precheck_minutes !== null) {
+    console.log(`  ${dim("PreCheck:")}      ${green(`${cur.precheck_minutes} min`)}`);
+  }
+  console.log(`  ${dim("Updated:")}       ${cur.age_minutes}m ago`);
   console.log();
-  for (const w of waits) {
-    const mins = w.wait_minutes;
-    const color = mins === null ? dim : mins <= 15 ? green : mins <= 30 ? yellow : red;
-    const waitStr = mins !== null ? `${mins} min` : "N/A";
-    console.log(`  ${w.checkpoint.padEnd(30)} ${color(waitStr)}`);
+
+  if (data.checkpoints.length > 0) {
+    console.log(dim("  Checkpoints:"));
+    for (const cp of data.checkpoints) {
+      const c = cp.wait <= 5 ? green : cp.wait <= 15 ? yellow : red;
+      const pre = cp.precheck ? dim(" (PreCheck)") : "";
+      console.log(`    ${cp.name.padEnd(28)} ${c(`${cp.wait} min`)}${pre}`);
+    }
+    console.log();
+  }
+
+  if (data.alerts.length > 0) {
+    console.log(dim("  Alerts:"));
+    for (const a of data.alerts) {
+      console.log(`    ${a.severity === "warning" ? yellow(a.summary) : dim(a.summary)}`);
+    }
   }
 }

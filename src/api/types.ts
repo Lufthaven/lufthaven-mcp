@@ -144,10 +144,34 @@ export type FlightDeal = {
   found_at: string;
 };
 
-/** TSA wait time */
-export type TsaWaitTime = {
+/** TSA wait time response */
+export type TsaResponse = {
   airport: string;
-  checkpoint: string;
-  wait_minutes: number | null;
-  updated_at: string | null;
+  current: {
+    wait_minutes: number;
+    precheck_minutes: number | null;
+    observed_at: string;
+    source: string;
+    age_minutes: number;
+  };
+  checkpoints: Array<{
+    name: string;
+    wait: number;
+    precheck: boolean;
+    observed_at: string;
+    source: string;
+  }>;
+  historical: Array<{
+    hour_utc: number;
+    avg: number;
+    p50: number;
+    p90: number;
+    sample_count: number;
+  }>;
+  alerts: Array<{
+    headline: string;
+    summary: string;
+    severity: string;
+    source_name: string;
+  }>;
 };

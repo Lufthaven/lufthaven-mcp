@@ -1,6 +1,6 @@
 import { GATEWAY_API_URL } from "../shared/config.js";
 import { apiGet } from "./client.js";
-import type { FlightDeal, TsaWaitTime } from "./types.js";
+import type { FlightDeal, TsaResponse } from "./types.js";
 
 export async function getFlightDeals(
   origin: string,
@@ -14,10 +14,13 @@ export async function getFlightDeals(
   });
 }
 
-export async function getTsaWaitTimes(airportCode: string): Promise<TsaWaitTime[]> {
-  return apiGet<TsaWaitTime[]>(GATEWAY_API_URL, "/api/tsa/wait", { airport: airportCode });
-}
-
-export async function getTsaOverview(): Promise<TsaWaitTime[]> {
-  return apiGet<TsaWaitTime[]>(GATEWAY_API_URL, "/api/tsa/overview");
+export async function getTsaWaitTimes(airportCode: string): Promise<TsaResponse> {
+  // TSA endpoint returns raw object, not { data } envelope
+  const url = new URL("/api/tsa/wait", GATEWAY_API_URL);
+  url.searchParams.set("airport", airportCode);
+  const res = await fetch(url.toString(), {
+    headers: { Accept: "application/json" },
+    signal: AbortSignal.timeout(10_000),
+  });
+  return res.json() as Promise<TsaResponse>;
 }
