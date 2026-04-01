@@ -1,22 +1,36 @@
 # Lufthaven
 
-Flight data MCP server + CLI. Real-time flight tracking, airport weather, deals, and TSA wait times for AI agents and developers.
+Flight data for AI agents and developers. Real-time tracking, weather, deals, and TSA wait times.
 
-**No API key required.** Works with ChatGPT, Claude, and any MCP-compatible AI agent.
+No API key required.
 
-## Quick Start
+## What You Get
 
-### CLI
+- `flight_status` — real-time flight status, gates, delays, live GPS position
+- `airport_search` — find airports by name, code, or city
+- `live_aircraft` — aircraft currently flying in an area
+- `airport_weather` — METAR conditions and flight rules
+- `airport_delays` — FAA ground delay programs
+- `flight_deals` — cheap flight deals from an origin
+- `tsa_wait_times` — TSA security checkpoint wait times
+- `flight_trail` — flight path / position history
+
+## Requirements
+
+- **Node.js 18 or later**
+
+## Install
+
+### Claude Code
+
 ```bash
-npx lufthaven flight UA444
-npx lufthaven weather KJFK
-npx lufthaven deals SFO
-npx lufthaven tsa LAX
+claude mcp add lufthaven -- npx -y lufthaven
 ```
 
-### Claude Code / Claude Desktop
+### Claude Desktop
 
-Add to your MCP config (`claude_desktop_config.json` or `.mcp.json`):
+Add to `claude_desktop_config.json`:
+
 ```json
 {
   "mcpServers": {
@@ -28,50 +42,62 @@ Add to your MCP config (`claude_desktop_config.json` or `.mcp.json`):
 }
 ```
 
-Then ask Claude: *"What's the status of UA444?"* or *"Are there any delays at JFK?"*
+### Codex
+
+Add to your project's `codex.json` or global MCP config:
+
+```json
+{
+  "mcpServers": {
+    "lufthaven": {
+      "command": "npx",
+      "args": ["-y", "lufthaven"]
+    }
+  }
+}
+```
 
 ### ChatGPT
 
-Connect the hosted MCP endpoint in Settings → Connectors → Create:
+Settings → Connectors → Create, then paste:
+
 ```
 https://lufthaven-mcp.workers.dev/mcp
 ```
 
-## Tools
-
-| Tool | What it does |
-|------|-------------|
-| `flight_status` | Real-time flight status by code (UA444, AA100) |
-| `airport_search` | Find airports by name, code, or city |
-| `live_aircraft` | Aircraft in a geographic area |
-| `airport_weather` | METAR weather for any airport |
-| `airport_delays` | FAA ground delays and stops |
-| `flight_deals` | Cheap flight deals from an origin |
-| `tsa_wait_times` | TSA security checkpoint wait times |
-| `flight_trail` | Flight path / position history |
-
-## CLI Commands
+Then try:
 
 ```
-lufthaven flight <code>         Flight status
-lufthaven airport <query>       Search airports
-lufthaven weather <ICAO>        Airport weather (METAR)
-lufthaven delays [ICAO]         FAA delays
-lufthaven live --airport <code> Aircraft near airport
-lufthaven deals <origin>        Cheap flights
-lufthaven tsa <airport>         TSA wait times
+What's the status of UA444?
+Are there any delays at JFK right now?
+Find me cheap flights from SFO to Tokyo.
+What's the weather at Heathrow?
+```
+
+## CLI
+
+Also works as a standalone CLI:
+
+```bash
+npx lufthaven flight UA444
+npx lufthaven weather KJFK
+npx lufthaven deals SFO --to NRT
+npx lufthaven tsa LAX
+npx lufthaven live --airport KLAX
+npx lufthaven delays
+npx lufthaven airport "san francisco"
 ```
 
 All commands support `--json` for raw JSON output.
 
-## Data Sources
+## Data
 
-- **Live ADS-B**: Real-time aircraft positions via community receivers
-- **FAA SWIM**: US flight status from FAA data feeds
-- **Weather**: METAR/TAF from aviationweather.gov
-- **Delays**: FAA NAS status
-- **Deals**: Google Flights price monitoring
-- **TSA**: Airport security wait times
+- **Live ADS-B** — real-time aircraft positions from community receivers worldwide
+- **FAA SWIM** — US flight status direct from FAA data feeds
+- **Weather** — METAR/TAF from aviationweather.gov
+- **Delays** — FAA NAS ground delay programs
+- **Deals** — Google Flights price monitoring
+- **TSA** — airport security checkpoint wait times
 
 ## License
 
