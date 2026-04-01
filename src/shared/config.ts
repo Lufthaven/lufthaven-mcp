@@ -6,4 +6,4 @@ export const GATEWAY_API_URL =
 
 export const REQUEST_TIMEOUT_MS = 10_000;
 
-export const PACKAGE_VERSION = "0.1.0";
+export const PACKAGE_VERSION = "0.1.1";

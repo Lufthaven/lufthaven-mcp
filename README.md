@@ -46,7 +46,7 @@ Reload plugins:
 Or add directly as an MCP server:
 
 ```bash
-claude mcp add lufthaven -- npx -y lufthaven
+claude mcp add lufthaven -- npx -y -p lufthaven lufthaven-mcp
 ```
 
 ### Claude Desktop
@@ -58,7 +58,7 @@ Add to `claude_desktop_config.json`:
   "mcpServers": {
     "lufthaven": {
       "command": "npx",
-      "args": ["-y", "lufthaven"]
+      "args": ["-y", "-p", "lufthaven", "lufthaven-mcp"]
     }
   }
 }
@@ -73,7 +73,7 @@ Add to your project's `codex.json` or global MCP config:
   "mcpServers": {
     "lufthaven": {
       "command": "npx",
-      "args": ["-y", "lufthaven"]
+      "args": ["-y", "-p", "lufthaven", "lufthaven-mcp"]
     }
   }
 }
