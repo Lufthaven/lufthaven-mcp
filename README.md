@@ -21,7 +21,29 @@ No API key required.
 
 ## Install
 
-### Claude Code
+### Claude Code (plugin)
+
+Add the marketplace:
+
+```bash
+/plugin marketplace add Lufthaven/lufthaven-mcp
+```
+
+Install the plugin:
+
+```bash
+/plugin install lufthaven@lufthaven
+```
+
+Reload plugins:
+
+```bash
+/reload-plugins
+```
+
+### Claude Code (MCP)
+
+Or add directly as an MCP server:
 
 ```bash
 claude mcp add lufthaven -- npx -y lufthaven
