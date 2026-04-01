@@ -5,7 +5,7 @@ import { getFlightDeals } from "../../api/gateway.js";
 export function registerFlightDeals(server: McpServer): void {
   server.tool(
     "flight_deals",
-    "Find cheap flight deals from an origin airport. Optionally filter by destination and maximum price. Returns deals with prices, airlines, dates, and number of stops.",
+    "Find cheap flight deals from an origin airport. Optionally filter by destination and maximum price. Returns deals with prices, airlines, dates, stops, duration, and a Google Flights booking URL for each deal.",
     FlightDealsInput.shape,
     async ({ origin, destination, max_price }) => {
       const data = await getFlightDeals(origin, destination, max_price);

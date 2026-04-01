@@ -32,5 +32,8 @@ export async function runDeals(args: string[], json: boolean): Promise<void> {
       const ret = d.return_date ? new Date(d.return_date).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
       console.log(`  ${"".padEnd(12)} ${dim(dep)}${ret ? ` → ${ret}` : ""}${d.trip_length_in_days ? ` (${d.trip_length_in_days}d)` : ""}`);
     }
+    if (d.google_flights_url) {
+      console.log(`  ${"".padEnd(12)} ${dim(d.google_flights_url)}`);
+    }
   }
 }

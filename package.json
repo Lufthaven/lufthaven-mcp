@@ -1,6 +1,6 @@
 {
   "name": "lufthaven",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Flight data MCP server + CLI. Real-time flight tracking, airport weather, deals, and TSA wait times for AI agents and developers.",
   "type": "module",
   "bin": {
