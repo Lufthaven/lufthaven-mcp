@@ -1,4 +1,4 @@
-import { REQUEST_TIMEOUT_MS } from "../shared/config.js";
+import { REQUEST_TIMEOUT_MS, PACKAGE_VERSION } from "../shared/config.js";
 
 export class ApiError extends Error {
   constructor(
@@ -9,6 +9,18 @@ export class ApiError extends Error {
     super(message);
   }
 }
+
+/** Detect if running as MCP server (stdio) or CLI */
+const CLIENT_TYPE = process.argv[1]?.endsWith("stdio.js") ? "mcp" : "cli";
+const USER_AGENT = `lufthaven-${CLIENT_TYPE}/${PACKAGE_VERSION}`;
+
+/** Standard headers for all API requests — enables analytics on the API side */
+export const API_HEADERS = {
+  Accept: "application/json",
+  "User-Agent": USER_AGENT,
+  "X-Lufthaven-Client": CLIENT_TYPE,
+  "X-Lufthaven-Version": PACKAGE_VERSION,
+};
 
 /** Fetch JSON from an API with timeout and error handling */
 export async function apiGet<T>(
@@ -24,7 +36,7 @@ export async function apiGet<T>(
   }
 
   const res = await fetch(url.toString(), {
-    headers: { Accept: "application/json" },
+    headers: API_HEADERS,
     signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
   });
 
