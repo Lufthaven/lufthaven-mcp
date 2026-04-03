@@ -66,6 +66,7 @@ export const FlightSearchInput = z.object({
   class: z.enum(["economy", "premium_economy", "business", "first"]).optional().describe("Travel class"),
   currency: z.string().length(3).optional().describe("ISO currency code"),
   trip_type: z.enum(["round_trip", "one_way"]).optional().describe("Trip type"),
+  bags: z.enum(["checked", "carry_on"]).optional().describe("Minimum baggage: 'checked' = must include free checked bag, 'carry_on' = carry-on minimum"),
 });
 
 export const ReturnFlightsInput = z.object({

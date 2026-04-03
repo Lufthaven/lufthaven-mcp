@@ -9,4 +9,4 @@ export const FLIGHT_SEARCH_API_URL =
 
 export const REQUEST_TIMEOUT_MS = 10_000;
 
-export const PACKAGE_VERSION = "0.1.5";
+export const PACKAGE_VERSION = "0.1.6";

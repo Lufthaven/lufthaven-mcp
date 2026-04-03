@@ -74,6 +74,7 @@ async function runFlights(args: string[], json: boolean): Promise<void> {
     stops: flagValue(args, "--stops") ,
     flightClass: flagValue(args, "--class") ,
     currency: flagValue(args, "--currency") ,
+    bags: flagValue(args, "--bags") ,
   });
 
   if (json) { console.log(JSON.stringify(data, null, 2)); return; }

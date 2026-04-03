@@ -58,6 +58,7 @@ export async function searchFlights(
     flightClass?: string;
     currency?: string;
     tripType?: string;
+    bags?: string;
   },
 ): Promise<SearchResponse> {
   return searchApiGet<SearchResponse>("/v1/search", {
@@ -75,6 +76,7 @@ export async function searchFlights(
     class: options?.flightClass,
     currency: options?.currency,
     trip_type: options?.tripType,
+    bags: options?.bags,
   });
 }
 
