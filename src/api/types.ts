@@ -180,3 +180,67 @@ export type TsaResponse = {
     source_name: string;
   }>;
 };
+
+// ─── Flight Search API types ─────────────────────────────────
+
+export type CalendarPrice = {
+  departure_date: string;
+  return_date: string;
+  price: number;
+};
+
+export type CalendarResponse = {
+  origin: string;
+  destination: string;
+  trip_length: number;
+  class: string;
+  currency: string;
+  prices: CalendarPrice[];
+};
+
+export type FlightEndpoint = {
+  airport: string;
+  city: string;
+  time: string;
+};
+
+export type FlightLeg = {
+  airline: string;
+  airline_code: string;
+  flight_number: string;
+  aircraft: string;
+  departure: FlightEndpoint;
+  arrival: FlightEndpoint;
+  duration: string;
+  legroom?: string;
+};
+
+export type FlightOffer = {
+  price: number;
+  total_duration: string;
+  stops: number;
+  layovers: string[];
+  outbound: { legs: FlightLeg[] };
+  booking_url?: string;
+};
+
+export type SearchResponse = {
+  origin: string;
+  destination: string;
+  departure_date: string;
+  return_date: string;
+  currency: string;
+  price_range?: { low: number; high: number };
+  offers: FlightOffer[];
+};
+
+export type ReturnFlightOption = {
+  total_duration: string;
+  stops: number;
+  layovers: string[];
+  legs: FlightLeg[];
+};
+
+export type ReturnsResponse = {
+  return_flights: ReturnFlightOption[];
+};

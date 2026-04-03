@@ -8,6 +8,9 @@ import { registerAirportDelays } from "./tools/airport-delays.js";
 import { registerFlightDeals } from "./tools/flight-deals.js";
 import { registerTsaWaitTimes } from "./tools/tsa-wait-times.js";
 import { registerFlightTrail } from "./tools/flight-trail.js";
+import { registerFlightCalendar } from "./tools/flight-calendar.js";
+import { registerFlightSearch } from "./tools/flight-search.js";
+import { registerReturnFlights } from "./tools/return-flights.js";
 
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -23,6 +26,9 @@ export function createServer(): McpServer {
   registerFlightDeals(server);
   registerTsaWaitTimes(server);
   registerFlightTrail(server);
+  registerFlightCalendar(server);
+  registerFlightSearch(server);
+  registerReturnFlights(server);
 
   return server;
 }

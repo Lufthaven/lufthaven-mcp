@@ -8,6 +8,7 @@ import { runDelays } from "./commands/delays.js";
 import { runLive } from "./commands/live.js";
 import { runDeals } from "./commands/deals.js";
 import { runTsa } from "./commands/tsa.js";
+import { runSearch } from "./commands/search.js";
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -23,6 +24,7 @@ async function main(): Promise<void> {
     case "live":    await runLive(rest, json); break;
     case "deals":   await runDeals(rest, json); break;
     case "tsa":     await runTsa(rest, json); break;
+    case "search":  await runSearch(rest, json); break;
     case "--version": case "-v": console.log(`lufthaven v${PACKAGE_VERSION}`); break;
     case "--help": case "-h": case "help": case undefined: printHelp(); break;
     default:
@@ -46,6 +48,9 @@ function printHelp(): void {
     live                 Aircraft in an area (--lat/--lon or --airport)
     deals <origin>       Cheap flight deals (--to, --max)
     tsa <airport>        TSA security wait times
+    search calendar      Price calendar for a route
+    search flights       Search flights with filters
+    search returns       Return flights for selected outbound
 
   Options:
     --json               Output raw JSON
