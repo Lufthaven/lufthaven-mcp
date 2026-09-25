@@ -24,12 +24,6 @@ export const AirportDelaysInput = z.object({
   icao_code: z.string().min(2).max(10).regex(/^[A-Za-z0-9]+$/).optional().describe("ICAO airport code. Omit for all active delays."),
 });
 
-export const FlightDealsInput = z.object({
-  origin: z.string().length(3).describe("Origin airport IATA code (e.g., SFO)"),
-  destination: z.string().length(3).optional().describe("Destination airport IATA code"),
-  max_price: z.number().positive().optional().describe("Maximum price in USD"),
-});
-
 export const TsaWaitTimesInput = z.object({
   airport_code: z.string().min(3).max(4).describe("Airport IATA or ICAO code (e.g., LAX, KLAX)"),
 });

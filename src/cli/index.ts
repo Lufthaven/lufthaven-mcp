@@ -6,7 +6,6 @@ import { runAirport } from "./commands/airport.js";
 import { runWeather } from "./commands/weather.js";
 import { runDelays } from "./commands/delays.js";
 import { runLive } from "./commands/live.js";
-import { runDeals } from "./commands/deals.js";
 import { runTsa } from "./commands/tsa.js";
 import { runSearch } from "./commands/search.js";
 
@@ -22,7 +21,6 @@ async function main(): Promise<void> {
     case "weather": await runWeather(rest, json); break;
     case "delays":  await runDelays(rest, json); break;
     case "live":    await runLive(rest, json); break;
-    case "deals":   await runDeals(rest, json); break;
     case "tsa":     await runTsa(rest, json); break;
     case "search":  await runSearch(rest, json); break;
     case "--version": case "-v": console.log(`lufthaven v${PACKAGE_VERSION}`); break;
@@ -46,7 +44,6 @@ function printHelp(): void {
     weather <ICAO>       Airport weather (METAR)
     delays [ICAO]        FAA delay programs (all or specific airport)
     live                 Aircraft in an area (--lat/--lon or --airport)
-    deals <origin>       Cheap flight deals (--to, --max)
     tsa <airport>        TSA security wait times
     search calendar      Price calendar for a route
     search flights       Search flights with filters
@@ -63,7 +60,6 @@ function printHelp(): void {
     lufthaven flight UA444
     lufthaven weather KJFK
     lufthaven live --airport KLAX
-    lufthaven deals SFO --to NRT --max 500
     lufthaven tsa LAX
 
   MCP Server:

@@ -5,7 +5,6 @@ import { registerAirportSearch } from "./tools/airport-search.js";
 import { registerLiveAircraft } from "./tools/live-aircraft.js";
 import { registerAirportWeather } from "./tools/airport-weather.js";
 import { registerAirportDelays } from "./tools/airport-delays.js";
-import { registerFlightDeals } from "./tools/flight-deals.js";
 import { registerTsaWaitTimes } from "./tools/tsa-wait-times.js";
 import { registerFlightTrail } from "./tools/flight-trail.js";
 import { registerFlightCalendar } from "./tools/flight-calendar.js";
@@ -23,7 +22,6 @@ export function createServer(): McpServer {
   registerLiveAircraft(server);
   registerAirportWeather(server);
   registerAirportDelays(server);
-  registerFlightDeals(server);
   registerTsaWaitTimes(server);
   registerFlightTrail(server);
   registerFlightCalendar(server);

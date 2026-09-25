@@ -130,25 +130,6 @@ export type DelayInfo = {
   reasons: string[];
 };
 
-/** Flight deal */
-export type FlightDeal = {
-  id: string;
-  origin: string;
-  destination: string;
-  price: number;
-  currency: string;
-  airlines: string | null;
-  departure_date: string | null;
-  return_date: string | null;
-  trip_length_in_days: number | null;
-  number_of_stops_departing: number | null;
-  number_of_stops_returning: number | null;
-  total_flight_duration: string | null;
-  google_flights_url: string | null;
-  offer_found_date: string;
-  flight_class: number;
-};
-
 /** TSA wait time response */
 export type TsaResponse = {
   airport: string;

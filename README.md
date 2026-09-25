@@ -1,6 +1,6 @@
 # Lufthaven
 
-Flight data for AI agents and developers. Real-time tracking, weather, deals, and TSA wait times.
+Flight data for AI agents and developers. Real-time tracking, weather, and TSA wait times.
 
 No API key required.
 
@@ -11,7 +11,6 @@ No API key required.
 - `live_aircraft` — aircraft currently flying in an area
 - `airport_weather` — METAR conditions and flight rules
 - `airport_delays` — FAA ground delay programs
-- `flight_deals` — cheap flight deals from an origin
 - `tsa_wait_times` — TSA security checkpoint wait times
 - `flight_trail` — flight path / position history
 
@@ -103,7 +102,6 @@ Also works as a standalone CLI:
 ```bash
 npx lufthaven flight UA444
 npx lufthaven weather KJFK
-npx lufthaven deals SFO --to NRT
 npx lufthaven tsa LAX
 npx lufthaven live --airport KLAX
 npx lufthaven delays
@@ -118,7 +116,6 @@ All commands support `--json` for raw JSON output.
 - **FAA SWIM** — US flight status direct from FAA data feeds
 - **Weather** — METAR/TAF from aviationweather.gov
 - **Delays** — FAA NAS ground delay programs
-- **Deals** — Google Flights price monitoring
 - **TSA** — airport security checkpoint wait times
 
 ## License
