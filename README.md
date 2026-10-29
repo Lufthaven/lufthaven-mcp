@@ -1,5 +1,7 @@
 # Lufthaven
 
+The MCP server and CLI for [Lufthaven](https://lufthaven.app), the flight tracker for iPhone ([App Store](https://apps.apple.com/us/app/lufthaven-flight-tracker/id6809028730)).
+
 Flight data for AI agents and developers. Real-time tracking, weather, and TSA wait times.
 
 No API key required.
